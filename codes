@@ -1,0 +1,495 @@
+Here's a collection of simple C++ programs that demonstrate the concepts you've requested. Each program is designed to run in a Turbo C++ environment.
+
+### 1. Function Overloading (Polymorphism)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Math {
+public:
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+};
+
+int main() {
+    Math m;
+    cout << "Integer Addition: " << m.add(5, 10) << endl;
+    cout << "Double Addition: " << m.add(5.5, 10.5) << endl;
+    return 0;
+}
+```
+
+### 2. Inline Functions and Default Arguments
+
+```cpp
+#include <iostream>
+using namespace std;
+
+inline int multiply(int a, int b = 2) {
+    return a * b;
+}
+
+int main() {
+    cout << "Multiply by 2: " << multiply(5) << endl;
+    cout << "Multiply: " << multiply(5, 3) << endl;
+    return 0;
+}
+```
+
+### 3. Call by Reference and Return by Reference
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void modify(int &x) {
+    x += 10;
+}
+
+int& returnRef(int &x) {
+    return x;
+}
+
+int main() {
+    int a = 5;
+    modify(a);
+    cout << "After modify: " << a << endl;
+    int &ref = returnRef(a);
+    ref = 20;
+    cout << "After returnRef: " << a << endl;
+    return 0;
+}
+```
+
+### 4. Encapsulation with Different Data Types
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+private:
+    int rollno;
+    string name;
+    float percentage;
+
+public:
+    void setData(int r, string n, float p) {
+        rollno = r;
+        name = n;
+        percentage = p;
+    }
+
+    void display() {
+        cout << "Roll No: " << rollno << ", Name: " << name << ", Percentage: " << percentage << endl;
+    }
+};
+
+int main() {
+    Student s;
+    s.setData(101, "John Doe", 85.5);
+    s.display();
+    return 0;
+}
+```
+
+### 5. Access Specifiers and Data Hiding
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Employee {
+private:
+    int empID;
+    string name;
+
+public:
+    void getData(int id, string n) {
+        empID = id;
+        name = n;
+    }
+
+    void putData() {
+        cout << "Employee ID: " << empID << ", Name: " << name << endl;
+    }
+};
+
+int main() {
+    Employee e;
+    e.getData(1, "Alice");
+    e.putData();
+    return 0;
+}
+```
+
+### 6. Array of Objects
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Faculty {
+public:
+    int eid;
+    string ename;
+    float salary;
+
+    void input() {
+        cout << "Enter ID, Name, Salary: ";
+        cin >> eid >> ename >> salary;
+    }
+
+    void display() {
+        cout << "ID: " << eid << ", Name: " << ename << ", Salary: " << salary << endl;
+    }
+};
+
+int main() {
+    Faculty f[3];
+    for (int i = 0; i < 3; i++) {
+        f[i].input();
+    }
+    for (int i = 0; i < 3; i++) {
+        f[i].display();
+    }
+    return 0;
+}
+```
+
+### 7. Friend Class
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class College;
+
+class Student {
+private:
+    int rollNo;
+
+public:
+    void setRollNo(int r) {
+        rollNo = r;
+    }
+
+    friend class College; // Making College a friend
+};
+
+class College {
+public:
+    void displayRollNo(Student &s) {
+        cout << "Roll No: " << s.rollNo << endl;
+    }
+};
+
+int main() {
+    Student s;
+    s.setRollNo(101);
+    College c;
+    c.displayRollNo(s);
+    return 0;
+}
+```
+
+### 8. Static Data Members
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Counter {
+public:
+    static int count;
+
+    Counter() {
+        count++;
+    }
+};
+
+int Counter::count = 0;
+
+int main() {
+    Counter c1, c2, c3;
+    cout << "Count of objects: " << Counter::count << endl;
+    return 0;
+}
+```
+
+### 9. Static Member Function
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Example {
+public:
+    static void display() {
+        cout << "Static Function Called!" << endl;
+    }
+};
+
+int main() {
+    Example::display();
+    return 0;
+}
+```
+
+### 10. Operator Overloading
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Complex {
+public:
+    float real;
+    float imag;
+
+    Complex(float r = 0, float i = 0) : real(r), imag(i) {}
+
+    Complex operator+(const Complex &c) {
+        return Complex(real + c.real, imag + c.imag);
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+};
+
+int main() {
+    Complex c1(2.5, 3.5), c2(1.5, 2.5);
+    Complex c3 = c1 + c2;
+    c3.display();
+    return 0;
+}
+```
+
+### 11. Single Level Inheritance
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    string name;
+    int rollNo;
+
+    void getData(string n, int r) {
+        name = n;
+        rollNo = r;
+    }
+};
+
+class GeneralSecretary : public Student {
+public:
+    void display() {
+        cout << "Name: " << name << ", Roll No: " << rollNo << endl;
+    }
+};
+
+int main() {
+    GeneralSecretary gs;
+    gs.getData("Alice", 101);
+    gs.display();
+    return 0;
+}
+```
+
+### 12. Multiple Inheritance
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base1 {
+public:
+    void displayBase1() {
+        cout << "Base1 Function" << endl;
+    }
+};
+
+class Base2 {
+public:
+    void displayBase2() {
+        cout << "Base2 Function" << endl;
+    }
+};
+
+class Derived : public Base1, public Base2 {
+public:
+    void display() {
+        displayBase1();
+        displayBase2();
+    }
+};
+
+int main() {
+    Derived d;
+    d.display();
+    return 0;
+}
+```
+
+### 13. Multi-Level Inheritance
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    void displayA() {
+        cout << "Class A" << endl;
+    }
+};
+
+class B : public A {
+public:
+    void displayB() {
+        cout << "Class B" << endl;
+    }
+};
+
+class C : public B {
+public:
+    void displayC() {
+        cout << "Class C" << endl;
+    }
+};
+
+int main() {
+    C obj;
+    obj.displayA();
+    obj.displayB();
+    obj.displayC();
+    return 0;
+}
+```
+
+### 14. Virtual Base Class (Run-Time Polymorphism)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    virtual void show() {
+        cout << "Class A" << endl;
+    }
+};
+
+class B : virtual public A {
+public:
+    void show() {
+        cout << "Class B" << endl;
+    }
+};
+
+class C : virtual public A {
+public:
+    void show() {
+        cout << "Class C" << endl;
+    }
+};
+
+class D : public B, public C {
+public:
+    void show() {
+        cout << "Class D" << endl;
+    }
+};
+
+int main() {
+    D obj;
+    obj.show();
+    return 0;
+}
+```
+
+### 15. Parameterized Constructor
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+public:
+    int length, width;
+
+    Rectangle(int l, int w) {
+        length = l;
+        width = w;
+    }
+
+    int area() {
+        return length * width;
+    }
+};
+
+int main() {
+    Rectangle r(5, 10);
+    cout << "Area: " << r.area() << endl;
+    return 0;
+}
+```
+
+### 16. Copy Constructor
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Sample {
+public:
+    int data;
+
+    Sample(int d) : data(d) {}
+
+    // Copy constructor
+    Sample(const Sample &s) {
+        data = s.data;
+    }
+
+    void display() {
+        cout << "Data: " << data << endl;
+    }
+};
+
+int main() {
+    Sample s1(10);
+    Sample s2 = s1; // Calls copy constructor
+    s1.display();
+    s2.display();
+    return 0;
+}
+```
+
+### 17. Destructor
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Demo {
+public:
+    Demo() {
+        cout << "Constructor called!" << endl;
+    }
+
+    ~Demo() {
+        cout << "Destructor called!" << endl;
+    }
+};
+
+int main
